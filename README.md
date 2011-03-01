@@ -1,12 +1,12 @@
 You have a file with two languages in it.
 
-Is it possible to automatically group the words by language?
+## Is it possible to automatically group the words in a file in two unknown languages by language?
 
 Here's my attempt.
 
 It goes like this:
 
-count up the bigrams in each word. For example, _abracadabra_ gives:
+First, you tally up the bigrams in each word. For example, _abracadabra_ gives:
 
     ca 1
     da 1
