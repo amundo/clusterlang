@@ -1,4 +1,5 @@
 from random import * 
+from collections import defaultdict
 import codecs, sys
 sys.stdout = codecs.getwriter('utf-8')(sys.stdout)
 from math import floor, sqrt
@@ -38,21 +39,21 @@ def sim(v, w):
 def at_least_n_letters(words, n=3):
   return filter(lambda w: len(w) > n, words)
 
-
 def model(text):
   return freq(bigrams(text))
 
-def divide(words):
+def score_by_similarity(words):
   scored = []
-  seen = set()
   for i in words:
     for j in words:
-      if i != j and i.lower() != j.lower() and len(set(i).intersection(set(j))) > 2 and (i,j) not in seen and (j,i) not in seen:
+      if i != j and i.lower() != j.lower() and len(set(i).intersection(set(j))) > 2:
         score = sim(model(i),model(j))
         if score > 0:
           scored.append((score, i, j))
-          seen.add((i,j))
   return sorted(scored)
+
+def group_scored(scored):
+  pass
 
 def dump_scores(scores):
   for nth, (n,i,j) in enumerate(scores): 
@@ -74,5 +75,6 @@ if __name__ == "__main__":
   words = words[:1000]
   words = at_least_n_letters(words)
   vocab = set(words)
-  dump_scores(divide(vocab)) 
+  scored = score_by_similarity(vocab)
+  dump_scores(scored) 
   
