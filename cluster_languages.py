@@ -47,7 +47,7 @@ def divide(words):
   seen = set()
   for i in words:
     for j in words:
-      if i != j and len(set(i).intersection(set(j))) > 2 and (i,j) not in seen and (j,i) not in seen:
+      if i != j and i.lower() != j.lower() and len(set(i).intersection(set(j))) > 2 and (i,j) not in seen and (j,i) not in seen:
         score = sim(model(i),model(j))
         if score > 0:
           scored.append((score, i, j))
